@@ -1,0 +1,18 @@
+<h1>Show Annotations</h1>
+
+<ul>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @annotations.body %>
+  </li>
+
+  <li>
+    <strong>At:</strong>
+    <%= @annotations.at %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.annotations_path(@conn, :edit, @annotations) %></span>
+<span><%= link "Back", to: Routes.annotations_path(@conn, :index) %></span>

@@ -1,0 +1,6 @@
+<h1>Edit Videos</h1>
+
+<%= render "form.html", changeset: @changeset, categories: @categories,
+                        action: Routes.videos_path(@conn, :update, @videos) %>
+
+<span><%= link "Back", to: Routes.videos_path(@conn, :index) %></span>

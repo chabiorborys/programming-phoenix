@@ -1,0 +1,5 @@
+<h1>Edit Annotations</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.annotations_path(@conn, :update, @annotations)) %>
+
+<span><%= link "Back", to: Routes.annotations_path(@conn, :index) %></span>
