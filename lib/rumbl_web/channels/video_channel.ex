@@ -1,7 +1,7 @@
 defmodule Rumbl.VideoChannel do
   use RumblWeb, :channel
 
-  alias Rumbl.Annotation.Annotations
+  alias Rumbl.Annotations.Annotation
   alias Rumbl.Video.Videos
 
   def join("videos:" <> video_id, _params, socket) do
@@ -29,7 +29,7 @@ defmodule Rumbl.VideoChannel do
     changeset =
       user
       |> build_assoc(:annotations, video_id: socket.assigns.video_id)
-      |>Annotations.changeset(params)
+      |>Annotation.changeset(params)
 
     case Repo.insert(changeset) do
       {:ok, annotation} ->

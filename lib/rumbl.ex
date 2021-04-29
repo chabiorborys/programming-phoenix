@@ -1,9 +1,12 @@
 defmodule Rumbl do
-  @moduledoc """
-  Rumbl keeps the contexts that define your domain
-  and business logic.
+  import Supervisor.Spec
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
+
+  children = [
+
+    supervisor(Rumbl.Endpoint, [])
+  ]
+
+
+
 end
