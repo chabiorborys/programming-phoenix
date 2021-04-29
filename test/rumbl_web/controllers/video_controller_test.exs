@@ -4,9 +4,6 @@ defmodule Rumbl.VideoControllerTest do
   alias Rumbl.Video.Videos
 
 
-
-
-
   defp video_count(query), do: Repo.one(from v in query, select: count(v.id))
 
   setup %{conn: conn} = config do

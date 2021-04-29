@@ -1,4 +1,4 @@
-defmodule Rumbl.Annotation.Annotations do
+defmodule Rumbl.Annotations.Annotation do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -12,8 +12,8 @@ defmodule Rumbl.Annotation.Annotations do
   end
 
   @doc false
-  def changeset(annotations, attrs) do
-    annotations
+  def changeset(annotation, attrs) do
+    annotation
     |> cast(attrs, [:body, :at])
     |> validate_required([:body, :at])
   end
