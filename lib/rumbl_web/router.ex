@@ -27,7 +27,7 @@ defmodule RumblWeb.Router do
   scope "/manage", RumblWeb do
     pipe_through [:browser, :authenticate_user]
 
-    resources "/videos", VideosController
+    resources "/videos", VideoController
   end
 
   # Other scopes may use custom stacks.

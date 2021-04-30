@@ -1,4 +1,4 @@
-defmodule RumblWeb.VideosController do
+defmodule RumblWeb.VideoController do
   use RumblWeb, :controller
 
   alias Rumbl.Video.Video
@@ -25,17 +25,17 @@ defmodule RumblWeb.VideosController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"videos" => videos_params}, user) do
+  def create(conn, %{"video" => video_params}, user) do
     changeset =
       user
       |> build_assoc(:videos)
-      |> Video.changeset(videos_params)
+      |> Video.changeset(video_params)
 
     case Repo.insert(changeset) do
-      {:ok, videos} ->
+      {:ok, video} ->
         conn
-        |> put_flash(:info, "Videos created successfully.")
-        |> redirect(to: Routes.videos_path(conn, :index))
+        |> put_flash(:info, "Video created successfully.")
+        |> redirect(to: Routes.video_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -43,38 +43,38 @@ defmodule RumblWeb.VideosController do
   end
 
   def show(conn, %{"id" => id}, user) do
-    videos = Repo.get!(user_videos(user), id)
-    render(conn, "show.html", videos: videos)
+    video = Repo.get!(user_videos(user), id)
+    render(conn, "show.html", video: video)
   end
 
   def edit(conn, %{"id" => id}, user) do
-    videos = Repo.get!(user_videos(user), id)
-    changeset = Video.changeset(videos)
-    render(conn, "edit.html", videos: videos, changeset: changeset)
+    video = Repo.get!(user_videos(user), id)
+    changeset = Video.changeset(video)
+    render(conn, "edit.html", video: video, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "videos" => videos_params}, user) do
-    videos = Repo.get!(user_videos(user), id)
-    changeset = Video.changeset(videos, videos_params)
+  def update(conn, %{"id" => id, "video" => video_params}, user) do
+    video = Repo.get!(user_videos(user), id)
+    changeset = Video.changeset(video, video_params)
 
     case Repo.update(changeset) do
-      {:ok, videos} ->
+      {:ok, video} ->
         conn
-        |> put_flash(:info, "Videos updated successfully.")
-        |> redirect(to: Routes.videos_path(conn, :show, videos))
+        |> put_flash(:info, "Video updated successfully.")
+        |> redirect(to: Routes.video_path(conn, :show, video))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", videos: videos, changeset: changeset)
+        render(conn, "edit.html", video: video, changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}, user) do
-    videos = Repo.get!(user_videos(user), id)
-    Repo.delete!(videos)
+    video = Repo.get!(user_videos(user), id)
+    Repo.delete!(video)
 
     conn
-    |> put_flash(:info, "Videos deleted successfully.")
-    |> redirect(to: Routes.videos_path(conn, :index))
+    |> put_flash(:info, "Video deleted successfully.")
+    |> redirect(to: Routes.video_path(conn, :index))
   end
 
   defp user_videos(user) do

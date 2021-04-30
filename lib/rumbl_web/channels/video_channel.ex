@@ -3,6 +3,7 @@ defmodule Rumbl.VideoChannel do
 
   alias Rumbl.Annotations.Annotation
   alias Rumbl.Video.Video
+  alias RumblWeb.AnnotationView
 
   def join("videos:" <> video_id, _params, socket) do
     video_id = String.to_integer(video_id)
@@ -15,7 +16,7 @@ defmodule Rumbl.VideoChannel do
         preload: [:user]
     )
 
-    resp = %{annotations: Phoenix.View.render_many(annotations, AnnontationView,
+    resp = %{annotations: Phoenix.View.render_many(annotations, AnnotationView,
                                                    "annotation.json")}
     {:ok, resp, assign(socket, :video_id, video_id)}
   end
