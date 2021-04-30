@@ -1,7 +1,7 @@
 defmodule Rumbl.VideoControllerTest do
   use RumblWeb.ConnCase
   alias Rumbl.Video
-  alias Rumbl.Video.Videos
+  alias Rumbl.Video.Video
 
 
   defp video_count(query), do: Repo.one(from v in query, select: count(v.id))

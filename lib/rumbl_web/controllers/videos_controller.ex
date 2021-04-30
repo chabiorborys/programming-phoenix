@@ -1,7 +1,7 @@
 defmodule RumblWeb.VideosController do
   use RumblWeb, :controller
 
-  alias Rumbl.Video.Videos
+  alias Rumbl.Video.Video
   alias Rumbl.Category
 
   plug :load_categories when action in [:new, :create, :edit, :update]
@@ -21,7 +21,7 @@ defmodule RumblWeb.VideosController do
     changeset =
       user
       |> build_assoc(:videos)
-      |> Videos.changeset()
+      |> Video.changeset()
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -29,7 +29,7 @@ defmodule RumblWeb.VideosController do
     changeset =
       user
       |> build_assoc(:videos)
-      |> Videos.changeset(videos_params)
+      |> Video.changeset(videos_params)
 
     case Repo.insert(changeset) do
       {:ok, videos} ->
@@ -49,13 +49,13 @@ defmodule RumblWeb.VideosController do
 
   def edit(conn, %{"id" => id}, user) do
     videos = Repo.get!(user_videos(user), id)
-    changeset = Videos.changeset(videos)
+    changeset = Video.changeset(videos)
     render(conn, "edit.html", videos: videos, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "videos" => videos_params}, user) do
     videos = Repo.get!(user_videos(user), id)
-    changeset = Videos.changeset(videos, videos_params)
+    changeset = Video.changeset(videos, videos_params)
 
     case Repo.update(changeset) do
       {:ok, videos} ->

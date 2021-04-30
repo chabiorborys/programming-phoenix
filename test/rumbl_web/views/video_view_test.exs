@@ -3,8 +3,8 @@ defmodule Rumbl.VideoViewTest do
   import Phoenix.View
 
   test "renders index.html", %{conn: conn} do
-    videos = [%Rumbl.Video.Videos{id: "1", title: "dogs"},
-              %Rumbl.Video.Videos{id: "2", title: "cats"}]
+    videos = [%Rumbl.Video.Video{id: "1", title: "dogs"},
+              %Rumbl.Video.Video{id: "2", title: "cats"}]
     content = render_to_string(RumblWeb.VideosView, "index.html",
                                 conn: conn, videos: videos)
 
@@ -15,7 +15,7 @@ defmodule Rumbl.VideoViewTest do
   end
 
   test "renders new.html", %{conn: conn} do
-    changeset = Rumbl.Video.Videos.changeset(%Rumbl.Video.Videos{})
+    changeset = Rumbl.Video.Video.changeset(%Rumbl.Video.Video{})
     categories = []
     content = render_to_string(RumblWeb.VideosView, "new.html",
       conn: conn, changeset: changeset, categories: categories)

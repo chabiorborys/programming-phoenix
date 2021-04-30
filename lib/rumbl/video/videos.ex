@@ -1,4 +1,4 @@
-defmodule Rumbl.Video.Videos do
+defmodule Rumbl.Video.Video do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -41,7 +41,7 @@ defmodule Rumbl.Video.Videos do
     |> String.replace(~r/[^\w-]+/u, "-")
   end
 
-  defimpl Phoenix.Param, for: Rumbl.Video.Videos do
+  defimpl Phoenix.Param, for: Rumbl.Video.Video do
     def to_param(%{slug: slug, id: id}) do
       "#{id}-#{slug}"
     end

@@ -2,11 +2,11 @@ defmodule Rumbl.VideoChannel do
   use RumblWeb, :channel
 
   alias Rumbl.Annotations.Annotation
-  alias Rumbl.Video.Videos
+  alias Rumbl.Video.Video
 
   def join("videos:" <> video_id, _params, socket) do
     video_id = String.to_integer(video_id)
-    video = Repo.get!(Videos, video_id)
+    video = Repo.get!(Video, video_id)|>IO.inspect()
 
     annotations = Repo.all(
       from a in assoc(video, :annotations),
