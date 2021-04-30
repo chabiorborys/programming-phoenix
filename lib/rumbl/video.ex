@@ -6,7 +6,7 @@ defmodule Rumbl.Video do
   import Ecto.Query, warn: false
   alias Rumbl.Repo
 
-  alias Rumbl.Video.Videos
+  alias Rumbl.Video.Video
 
   @doc """
   Returns the list of user_id.
@@ -18,7 +18,7 @@ defmodule Rumbl.Video do
 
   """
   def list_user_id do
-    Repo.all(Videos)
+    Repo.all(Video)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Rumbl.Video do
       ** (Ecto.NoResultsError)
 
   """
-  def get_videos!(id), do: Repo.get!(Videos, id)
+  def get_videos!(id), do: Repo.get!(Video, id)
 
   @doc """
   Creates a videos.
@@ -50,8 +50,8 @@ defmodule Rumbl.Video do
 
   """
   def create_videos(attrs \\ %{}) do
-    %Videos{}
-    |> Videos.changeset(attrs)
+    %Video{}
+    |> Video.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -61,15 +61,15 @@ defmodule Rumbl.Video do
   ## Examples
 
       iex> update_videos(videos, %{field: new_value})
-      {:ok, %Videos{}}
+      {:ok, %Video{}}
 
       iex> update_videos(videos, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_videos(%Videos{} = videos, attrs) do
+  def update_videos(%Video{} = videos, attrs) do
     videos
-    |> Videos.changeset(attrs)
+    |> Video.changeset(attrs)
     |> Repo.update()
   end
 
@@ -79,13 +79,13 @@ defmodule Rumbl.Video do
   ## Examples
 
       iex> delete_videos(videos)
-      {:ok, %Videos{}}
+      {:ok, %Video{}}
 
       iex> delete_videos(videos)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_videos(%Videos{} = videos) do
+  def delete_videos(%Video{} = videos) do
     Repo.delete(videos)
   end
 
@@ -95,14 +95,13 @@ defmodule Rumbl.Video do
   ## Examples
 
       iex> change_videos(videos)
-      %Ecto.Changeset{source: %Videos{}}
+      %Ecto.Changeset{source: %Video{}}
 
   """
-  def change_videos(%Videos{} = videos) do
-    Videos.changeset(videos, %{})
+  def change_videos(%Video{} = videos) do
+    Video.changeset(videos, %{})
   end
 
-  alias Rumbl.Video.Videos
 
   @doc """
   Returns the list of videos.
@@ -110,11 +109,11 @@ defmodule Rumbl.Video do
   ## Examples
 
       iex> list_videos()
-      [%Videos{}, ...]
+      [%Video{}, ...]
 
   """
   def list_videos do
-    Repo.all(Videos)
+    Repo.all(Video)
   end
 
   @doc """
