@@ -8,6 +8,7 @@ defmodule Rumbl.Channels.VideoChannelTest do
     token = Phoenix.Token.sign(@endpoint, "user socket", user.id)
     {:ok, socket} = connect(RumblWeb.UserSocket, %{"token" => token})
 
+
     {:ok, socket: socket, user: user, video: video}
   end
 
@@ -21,5 +22,12 @@ defmodule Rumbl.Channels.VideoChannelTest do
 
     assert socket.assigns.video_id == vid.id
     assert %{annotations: [%{body: "one"}, %{body: "two"}]} = reply
+  end
+
+  test "insertying new annotations", %{socket: socket, video: vid} do
+    {:ok, _, socket} = subscribe_and_join(socket, "videos:#{vid.id}", %{})
+    ref = push socket, "new_annotation", %{body: "the body", at: 0}
+    assert_reply ref, :ok, %{}
+    assert_broadcast "new_annotation", %{}
   end
 end

@@ -35,11 +35,8 @@ defmodule Rumbl.Auth do
     token = Phoenix.Token.sign(conn, "user socket", user.id)
 
     conn
-    |> IO.inspect(label: "putting token #{token}")
     |> assign(:current_user, user)
-    |> IO.inspect(label: "putting curent user #{token}")
     |> assign(:user_token, token)
-    |> IO.inspect(label: "put user token #{token}")
   end
 
   def login_by_username_and_pass(conn, username, given_pass, opts) do

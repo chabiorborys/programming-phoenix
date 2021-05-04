@@ -22,6 +22,11 @@ defmodule RumblWeb.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
+      alias Rumbl.Repo
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query, only: [from: 1, from: 2]
+
       # The default endpoint for testing
       @endpoint RumblWeb.Endpoint
     end

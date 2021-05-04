@@ -9,7 +9,6 @@ defmodule Rumbl.CategoryRepoTest do
 
     query = Category |> Category.alphabetical()
     query = from c in query, select: c.name
-    IO.inspect(Repo.all(query))
-    assert Repo.all(query) == ~w(a Action b c Comedy Drama Romanace Sci-fi)
+    assert Repo.all(query) == ~w(a b c)
   end
 end

@@ -30,11 +30,9 @@ defmodule Rumbl.UserTest do
   test "registration_changeset with valid attributes hashes password" do
     valid_attrs = %{name: "A User", username: "eva", password: "123456"}
     changeset = User.registration_changeset(%User{}, valid_attrs)
-    IO.inspect(changeset)
     %{password: pass, password_hash: pass_hash} = changeset.changes
     assert changeset.valid?
     assert pass_hash
-    IO.inspect(pass_hash)
     assert Comeonin.Bcrypt.checkpw(pass, pass_hash)
   end
 
